@@ -5,10 +5,16 @@ Concepto: **“Construimos sistemas de IA que hacen que las empresas funcionen d
 
 ```bash
 npm install
-npm run dev       # desarrollo
-npm run build     # typecheck + build de producción (dist/)
-npm run preview   # servir el build
+npm run dev               # desarrollo (http://localhost:5173)
+npm run build             # typecheck + build de producción (dist/)
+npm run preview           # servir el build
+npm run build:standalone  # un único .html autocontenido, para abrir con doble clic
 ```
+
+`build:standalone` genera `dist-standalone/nodo-landing.html`: la página entera
+(script, estilos, fuentes e icono) en un solo archivo de ~1,5 MB que funciona
+desde el sistema de archivos, sin servidor. Útil para compartir una demo por
+correo o verla sin instalar nada.
 
 Stack: React 19 · TypeScript · Tailwind CSS v4 · GSAP + ScrollTrigger + SplitText · Three.js + React Three Fiber · Vite.
 
