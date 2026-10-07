@@ -39,31 +39,40 @@
   --text-title--letter-spacing: -0.03em;
 }
 
+/* ─────────────────────────────────────────────────────────────
+   Page ground — deliberately OUTSIDE @layer.
+   A host page may ship its own unlayered reset (an embed wrapper,
+   a CMS shell). Unlayered rules beat layered ones, so the dark
+   ground, the type and the color scheme are declared here to
+   survive that; everything else stays in @layer base.
+   ───────────────────────────────────────────────────────────── */
+:root {
+  --line: rgb(255 255 255 / 0.075);
+  --line-strong: rgb(255 255 255 / 0.14);
+  color-scheme: dark;
+}
+
+html {
+  background: #07080a;
+  -webkit-text-size-adjust: 100%;
+  scroll-padding-top: 5rem;
+}
+
+body {
+  margin: 0;
+  background: #07080a;
+  color: #e9ebee;
+  font-family: 'Instrument Sans Variable', ui-sans-serif, system-ui, sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  overflow-x: clip;
+}
+
 @layer base {
-  :root {
-    --line: rgb(255 255 255 / 0.075);
-    --line-strong: rgb(255 255 255 / 0.14);
-    color-scheme: dark;
-  }
-
-  html {
-    background: var(--color-ink-950);
-    -webkit-text-size-adjust: 100%;
-    scroll-padding-top: 5rem;
-  }
-
-  body {
-    background: var(--color-ink-950);
-    color: var(--color-fg);
-    font-family: var(--font-sans);
-    font-size: 1rem;
-    line-height: 1.6;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-rendering: optimizeLegibility;
-    overflow-x: clip;
-  }
-
   ::selection {
     background: var(--color-signal);
     color: var(--color-ink-950);
@@ -149,6 +158,25 @@
   .ticks > .tick-tr { top: -1px; right: -1px; border-top-width: 1px; border-right-width: 1px; }
   .ticks > .tick-bl { bottom: -1px; left: -1px; border-bottom-width: 1px; border-left-width: 1px; }
   .ticks > .tick-br { bottom: -1px; right: -1px; border-bottom-width: 1px; border-right-width: 1px; }
+
+  /* Connection-panel note: revealed on hover where hovering exists,
+     always visible on touch, where there is no hover to reveal it. */
+  .port-note {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: max-height 0.5s var(--ease-out-expo), opacity 0.5s var(--ease-out-expo);
+  }
+  .group:hover .port-note {
+    max-height: 6rem;
+    opacity: 1;
+  }
+  @media (hover: none) {
+    .port-note {
+      max-height: 6rem;
+      opacity: 1;
+    }
+  }
 
   .text-gradient-fade {
     background: linear-gradient(180deg, var(--color-fg) 30%, rgb(233 235 238 / 0.45));

@@ -20,14 +20,14 @@ export function useScrollScenes() {
 
     const mm = gsap.matchMedia()
     mm.add(MQ.motion, () => {
+      // hide first, so an element already in view is never seen before its reveal
+      gsap.set('[data-reveal]', { autoAlpha: 0 })
       ScrollTrigger.batch('[data-reveal]', {
         start: 'top 88%',
         once: true,
         onEnter: (batch) =>
           gsap.fromTo(batch, { autoAlpha: 0, y: 22 }, { autoAlpha: 1, y: 0, duration: 1.2, stagger: 0.08, ease: 'expo.out' }),
       })
-      // hide before reveal (only when motion is allowed)
-      gsap.set('[data-reveal]', { autoAlpha: 0 })
     })
     mm.add(MQ.reduced, () => {
       systemState.reducedMotion = true

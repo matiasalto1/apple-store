@@ -20,7 +20,10 @@ export function Architecture() {
   useGSAP(
     () => {
       const mm = gsap.matchMedia()
-      mm.add(MQ.motion, () => {
+      mm.add({ wide: `${MQ.motion} and ${MQ.desktop}`, narrow: `${MQ.motion} and ${MQ.mobile}` }, (self) => {
+        // A rightward entrance would push the bands past a narrow viewport,
+        // so the layers rise instead of sliding in below the desktop breakpoint.
+        const wide = !!self.conditions?.wide
         const layers = gsap.utils.toArray<HTMLElement>('[data-layer]')
         gsap.fromTo(
           '[data-spine]',
@@ -32,7 +35,13 @@ export function Architecture() {
           },
         )
         layers.forEach((layer) => {
-          gsap.from(layer, { autoAlpha: 0, x: 30, duration: 1.1, scrollTrigger: { trigger: layer, start: 'top 85%', once: true } })
+          gsap.from(layer, {
+            autoAlpha: 0,
+            x: wide ? 30 : 0,
+            y: wide ? 0 : 24,
+            duration: 1.1,
+            scrollTrigger: { trigger: layer, start: 'top 85%', once: true },
+          })
           activateOnScroll(layer, 'top 65%')
         })
       })

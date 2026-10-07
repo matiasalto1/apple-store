@@ -140,7 +140,7 @@ export function Solutions() {
           </div>
 
           {/* right: live demo */}
-          <div ref={panel} id="sol-panel" role="tabpanel" aria-labelledby={`sol-tab-${sol.key}`} className="lg:col-span-7">
+          <div ref={panel} id="sol-panel" role="tabpanel" tabIndex={0} aria-labelledby={`sol-tab-${sol.key}`} className="lg:col-span-7">
             <div className="lg:sticky lg:top-28">
               <div data-sol-anim className="flex items-baseline gap-4">
                 <span className="label-mono text-signal">{sol.index}</span>

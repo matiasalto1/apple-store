@@ -96,6 +96,7 @@ export function UseCases() {
           ref={stage}
           id="uc-panel"
           role="tabpanel"
+          tabIndex={0}
           aria-labelledby={`uc-tab-${uc.key}`}
           className="mt-6 grid overflow-hidden rounded-[26px] border border-white/[0.07] lg:grid-cols-[1fr_auto_1.35fr]"
         >

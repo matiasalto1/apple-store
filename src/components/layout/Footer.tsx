@@ -11,10 +11,10 @@ export function Footer() {
           <p className="mt-5 max-w-[22rem] text-[1.05rem] leading-snug tracking-[-0.01em] text-fg-soft">{site.tagline}</p>
         </div>
         <nav className="md:col-span-6 md:justify-self-end" aria-label="Pie de página">
-          <ul className="grid grid-cols-2 gap-x-14 gap-y-3 sm:grid-cols-3">
+          <ul className="grid grid-cols-2 gap-x-14 sm:grid-cols-3">
             {site.footerNav.map((n) => (
               <li key={n.href}>
-                <a href={n.href} className="text-[0.92rem] text-mute transition-colors hover:text-fg">
+                <a href={n.href} className="inline-block py-2 text-[0.92rem] text-mute transition-colors hover:text-fg">
                   {n.label}
                 </a>
               </li>

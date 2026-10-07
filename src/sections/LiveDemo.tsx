@@ -80,7 +80,7 @@ export function LiveDemo() {
 
         <div ref={root} className="mt-14 grid gap-4 lg:mt-20 lg:grid-cols-12">
           {/* incoming request */}
-          <article className="rounded-[22px] border border-white/[0.07] bg-ink-900/70 p-6 lg:col-span-4">
+          <article className="min-w-0 rounded-[22px] border border-white/[0.07] bg-ink-900/70 p-6 lg:col-span-4">
             <header className="label-mono flex items-center justify-between text-dim">
               <span>Bandeja de entrada</span>
               <span>09:41</span>
@@ -109,7 +109,7 @@ export function LiveDemo() {
           </article>
 
           {/* agent execution */}
-          <div className="relative overflow-hidden rounded-[22px] border border-white/[0.07] bg-ink-900/70 lg:col-span-5">
+          <div className="relative min-w-0 overflow-hidden rounded-[22px] border border-white/[0.07] bg-ink-900/70 lg:col-span-5">
             <div className="flex items-center justify-between border-b border-white/[0.06] px-6 py-4">
               <span className="label-mono flex items-center gap-2.5 text-mute">
                 <span className={`h-1.5 w-1.5 rounded-full ${done ? 'bg-emerald-400/90' : step >= 0 ? 'anim-blink bg-signal' : 'bg-white/25'}`} />
@@ -163,7 +163,7 @@ export function LiveDemo() {
           </div>
 
           {/* output */}
-          <div className="flex flex-col gap-4 lg:col-span-3">
+          <div className="flex min-w-0 flex-col gap-4 lg:col-span-3">
             <article className="flex-1 rounded-[22px] border border-white/[0.07] bg-ink-900/70 p-6">
               <p className="label-mono text-dim">Respuesta generada</p>
               <p className="mt-4 min-h-[9.5rem] text-[0.92rem] leading-relaxed text-fg-soft">
@@ -179,11 +179,11 @@ export function LiveDemo() {
 
           {/* completion */}
           <div
-            className={`rounded-[22px] border p-6 transition-all duration-1000 ease-[var(--ease-out-expo)] md:p-8 lg:col-span-12 ${
+            className={`min-w-0 rounded-[22px] border p-6 transition-all duration-1000 ease-[var(--ease-out-expo)] md:p-8 lg:col-span-12 ${
               done ? 'border-signal/20 bg-gradient-to-r from-signal/[0.06] to-transparent' : 'border-white/[0.06] opacity-50'
             }`}
           >
-            <div className="grid items-center gap-8 md:grid-cols-[auto_1fr_auto]">
+            <div className="grid items-center gap-8 lg:grid-cols-[auto_1fr_auto]">
               <p className="flex items-center gap-3 text-[1.3rem] font-medium tracking-[-0.02em]">
                 <span className={`grid h-8 w-8 place-items-center rounded-full border transition-colors ${done ? 'border-signal text-signal' : 'border-white/15 text-dim'}`}>✓</span>
                 {done ? 'Proceso completado' : 'Procesando…'}
@@ -192,7 +192,7 @@ export function LiveDemo() {
                 <Bar label="Tiempo humano (estimado)" value={`${HUMAN_MIN} minutos`} pct={done ? 100 : 0} muted />
                 <Bar label="Tiempo con IA" value={`${AI_SEC} segundos`} pct={done ? (AI_SEC / (HUMAN_MIN * 60)) * 100 : 0} />
               </div>
-              <div className="flex flex-col items-start gap-3 md:items-end">
+              <div className="flex flex-col items-start gap-3 lg:items-end">
                 <IllustrativeTag>Ejemplo ilustrativo</IllustrativeTag>
                 <MagneticButton variant="ghost" onClick={replay} strength={0.15}>
                   ↻ Reproducir

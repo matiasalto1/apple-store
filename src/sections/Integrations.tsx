@@ -82,12 +82,9 @@ export function Integrations() {
               <li
                 key={p.name}
                 data-port
-                tabIndex={0}
                 onMouseEnter={() => setHot(i)}
                 onMouseLeave={() => setHot(null)}
-                onFocus={() => setHot(i)}
-                onBlur={() => setHot(null)}
-                className="group relative flex min-h-[170px] flex-col justify-between bg-ink-950 p-5 outline-none transition-colors duration-500 hover:bg-ink-900 focus-visible:bg-ink-900 md:min-h-[210px] md:p-6"
+                className="group relative flex min-h-[170px] flex-col justify-between bg-ink-950 p-5 transition-colors duration-500 hover:bg-ink-900 md:min-h-[210px] md:p-6"
               >
                 <div className="flex items-start justify-between">
                   {/* port socket */}
@@ -102,9 +99,7 @@ export function Integrations() {
                 <div>
                   <h3 className="text-[1.15rem] font-medium tracking-[-0.02em] md:text-[1.3rem]">{p.name}</h3>
                   <p className="label-mono mt-1.5 text-[0.6rem] text-dim">{p.proto}</p>
-                  <p className="mt-3 max-h-0 overflow-hidden text-[0.82rem] text-mute opacity-0 transition-all duration-500 ease-[var(--ease-out-expo)] group-hover:max-h-20 group-hover:opacity-100 group-focus-visible:max-h-20 group-focus-visible:opacity-100">
-                    {p.note}
-                  </p>
+                  <p className="port-note mt-3 text-[0.82rem] text-mute">{p.note}</p>
                 </div>
               </li>
             ))}
