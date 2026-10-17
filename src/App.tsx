@@ -2,6 +2,7 @@ import { lazy, Suspense, useEffect, useState } from 'react'
 import { Navbar } from '@/components/layout/Navbar'
 import { Footer } from '@/components/layout/Footer'
 import { Cursor } from '@/components/ui/Cursor'
+import { ContactDialog } from '@/components/ui/ContactDialog'
 import { Hero } from '@/sections/Hero'
 import { Problem } from '@/sections/Problem'
 import { Transformation } from '@/sections/Transformation'
@@ -50,6 +51,7 @@ export default function App() {
         <FinalCTA />
       </main>
       <Footer />
+      <ContactDialog />
     </div>
   )
 }
