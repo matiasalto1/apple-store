@@ -111,7 +111,7 @@ export function Navbar() {
 
         <div className="flex items-center gap-2">
           <span className="hidden sm:block">
-            <MagneticButton href="#contacto" variant="ghost" strength={0.2}>
+            <MagneticButton href={site.contactHref} variant="ghost" strength={0.2}>
               Hablar con un especialista <Arrow />
             </MagneticButton>
           </span>
@@ -157,7 +157,7 @@ export function Navbar() {
           ))}
         </ul>
         <div className="container-x mt-10">
-          <MagneticButton href="#contacto" size="lg" className="w-full" onClick={() => setOpen(false)}>
+          <MagneticButton href={site.contactHref} size="lg" className="w-full" onClick={() => setOpen(false)}>
             Hablar con un especialista <Arrow />
           </MagneticButton>
         </div>

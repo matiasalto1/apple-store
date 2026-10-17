@@ -2,13 +2,13 @@ import { lazy, Suspense, useEffect, useState } from 'react'
 import { Navbar } from '@/components/layout/Navbar'
 import { Footer } from '@/components/layout/Footer'
 import { Cursor } from '@/components/ui/Cursor'
+import { ContactDialog } from '@/components/ui/ContactDialog'
 import { Hero } from '@/sections/Hero'
 import { Problem } from '@/sections/Problem'
 import { Transformation } from '@/sections/Transformation'
 import { Solutions } from '@/sections/Solutions'
 import { LiveDemo } from '@/sections/LiveDemo'
 import { UseCases } from '@/sections/UseCases'
-import { Impact } from '@/sections/Impact'
 import { Testimonials } from '@/sections/Testimonials'
 import { Architecture } from '@/sections/Architecture'
 import { Process } from '@/sections/Process'
@@ -44,7 +44,6 @@ export default function App() {
         <Solutions />
         <LiveDemo />
         <UseCases />
-        <Impact />
         <Testimonials />
         <Architecture />
         <Process />
@@ -52,6 +51,7 @@ export default function App() {
         <FinalCTA />
       </main>
       <Footer />
+      <ContactDialog />
     </div>
   )
 }
