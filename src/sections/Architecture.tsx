@@ -58,7 +58,7 @@ export function Architecture() {
       <div className="container-x grid gap-12 lg:grid-cols-12">
         <div className="lg:col-span-5">
           <div className="lg:sticky lg:top-28">
-            <SectionLabel index="08">Arquitectura</SectionLabel>
+            <SectionLabel index="07">Arquitectura</SectionLabel>
             <h2 id="arch-title" className="text-headline mt-6 font-medium" data-reveal>
               No agregamos IA.
               <br />

@@ -55,7 +55,7 @@ export function Integrations() {
       <div className="container-x">
         <div className="grid gap-6 lg:grid-cols-12">
           <div className="lg:col-span-8">
-            <SectionLabel index="10">Integración</SectionLabel>
+            <SectionLabel index="09">Integración</SectionLabel>
             <RevealText id="int-title" className="text-headline mt-6 max-w-[17ch] font-medium">
               Pensado para integrarse con la realidad de tu empresa.
             </RevealText>

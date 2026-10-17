@@ -173,7 +173,7 @@ export function Testimonials() {
   return (
     <section ref={root} id="testimonios" data-scene="hidden" className="relative py-[14vh] lg:py-[18vh]" aria-labelledby="testimonials-title">
       <div className="container-x">
-        <SectionLabel index="07">{first ? 'Clientes' : 'Primeros clientes'}</SectionLabel>
+        <SectionLabel index="06">{first ? 'Clientes' : 'Primeros clientes'}</SectionLabel>
         <div className="mt-6 grid gap-6 lg:grid-cols-12">
           <RevealText id="testimonials-title" className="text-headline max-w-[16ch] font-medium lg:col-span-8">
             {first ? 'Lo que dicen quienes ya trabajan con nosotros.' : 'Estamos sumando a nuestros primeros clientes.'}

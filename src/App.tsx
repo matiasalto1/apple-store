@@ -8,7 +8,6 @@ import { Transformation } from '@/sections/Transformation'
 import { Solutions } from '@/sections/Solutions'
 import { LiveDemo } from '@/sections/LiveDemo'
 import { UseCases } from '@/sections/UseCases'
-import { Impact } from '@/sections/Impact'
 import { Testimonials } from '@/sections/Testimonials'
 import { Architecture } from '@/sections/Architecture'
 import { Process } from '@/sections/Process'
@@ -44,7 +43,6 @@ export default function App() {
         <Solutions />
         <LiveDemo />
         <UseCases />
-        <Impact />
         <Testimonials />
         <Architecture />
         <Process />

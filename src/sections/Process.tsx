@@ -48,7 +48,7 @@ export function Process() {
       <div className="container-x grid gap-12 lg:grid-cols-12">
         <div className="lg:col-span-5">
           <div className="lg:sticky lg:top-28">
-            <SectionLabel index="09">Cómo trabajamos</SectionLabel>
+            <SectionLabel index="08">Cómo trabajamos</SectionLabel>
             <RevealText id="process-title" className="text-headline mt-6 max-w-[12ch] font-medium">
               Un proceso pensado para llegar a producción.
             </RevealText>
