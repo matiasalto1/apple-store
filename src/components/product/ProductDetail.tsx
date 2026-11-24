@@ -73,9 +73,17 @@ export function ProductDetail({ product }: { product: Product }) {
   useEffect(() => {
     const el = cta.current
     if (!el) return
-    const io = new IntersectionObserver(([e]) => setStickyBar(!e.isIntersecting && e.boundingClientRect.top < 0))
-    io.observe(el)
-    return () => io.disconnect()
+    let raf = 0
+    const check = () => {
+      cancelAnimationFrame(raf)
+      raf = requestAnimationFrame(() => setStickyBar(el.getBoundingClientRect().bottom < 0))
+    }
+    check()
+    window.addEventListener('scroll', check, { passive: true })
+    return () => {
+      cancelAnimationFrame(raf)
+      window.removeEventListener('scroll', check)
+    }
   }, [])
 
   return (

@@ -33,48 +33,50 @@ export function MobileMenu() {
           </button>
         </div>
 
-        <div className="flex-1 overflow-y-auto px-5 pb-4 pt-6" data-lenis-prevent="">
-          <p className="eyebrow mb-3 text-stone">Categorías</p>
-          <ul className="no-scrollbar -mx-5 flex gap-2 overflow-x-auto px-5 pb-2">
-            {cats.map((c) => (
-              <li key={c.id} className="shrink-0">
-                <Link href={`/categoria/${c.slug}`} onClick={close} className="chip bg-white">
-                  {c.name}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </div>
+        <div className="flex-1 overflow-y-auto" data-lenis-prevent="">
+          <div className="flex min-h-full flex-col justify-end px-5 pb-2 pt-6">
+            <p className="eyebrow mb-3 text-stone">Categorías</p>
+            <ul className="no-scrollbar -mx-5 flex gap-2 overflow-x-auto px-5 pb-5">
+              {cats.map((c) => (
+                <li key={c.id} className="shrink-0">
+                  <Link href={`/categoria/${c.slug}`} onClick={close} className="chip bg-white">
+                    {c.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
 
-        <nav aria-label="Menú principal" className="px-5">
-          <ul className="border-t hairline">
-            {links.map((l, i) => (
-              <motion.li
-                key={l.href}
-                initial={{ opacity: 0, x: -16 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.12 + i * 0.04, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                className="border-b hairline"
-              >
-                <Link href={l.href} onClick={close} className="flex min-h-[3.75rem] items-center justify-between font-display text-[1.75rem]">
-                  {l.label}
-                  <ArrowUpRight size={20} className="text-stone" />
-                </Link>
-              </motion.li>
-            ))}
-          </ul>
-        </nav>
+            <nav aria-label="Menú principal">
+              <ul className="border-t hairline">
+                {links.map((l, i) => (
+                  <motion.li
+                    key={l.href}
+                    initial={{ opacity: 0, x: -16 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.12 + i * 0.04, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                    className="border-b hairline"
+                  >
+                    <Link href={l.href} onClick={close} className="flex min-h-[3.75rem] items-center justify-between font-display text-[1.75rem]">
+                      {l.label}
+                      <ArrowUpRight size={20} className="text-stone" />
+                    </Link>
+                  </motion.li>
+                ))}
+              </ul>
+            </nav>
 
-        <div className="grid grid-cols-3 gap-2 px-5 pt-4">
-          <button type="button" onClick={() => setSearch(true)} className="flex flex-col items-center gap-1.5 rounded-2xl bg-sand/60 py-3 text-[0.8125rem] font-medium">
-            <Search size={19} /> Buscar
-          </button>
-          <Link href="/favoritos" onClick={close} className="flex flex-col items-center gap-1.5 rounded-2xl bg-sand/60 py-3 text-[0.8125rem] font-medium">
-            <Heart size={19} /> Favoritos
-          </Link>
-          <Link href="/cuenta" onClick={close} className="flex flex-col items-center gap-1.5 rounded-2xl bg-sand/60 py-3 text-[0.8125rem] font-medium">
-            <User size={19} /> Cuenta
-          </Link>
+            <div className="grid grid-cols-3 gap-2 pt-4">
+              <button type="button" onClick={() => setSearch(true)} className="flex flex-col items-center gap-1.5 rounded-2xl bg-sand/60 py-3 text-[0.8125rem] font-medium">
+                <Search size={19} /> Buscar
+              </button>
+              <Link href="/favoritos" onClick={close} className="flex flex-col items-center gap-1.5 rounded-2xl bg-sand/60 py-3 text-[0.8125rem] font-medium">
+                <Heart size={19} /> Favoritos
+              </Link>
+              <Link href="/cuenta" onClick={close} className="flex flex-col items-center gap-1.5 rounded-2xl bg-sand/60 py-3 text-[0.8125rem] font-medium">
+                <User size={19} /> Cuenta
+              </Link>
+            </div>
+          </div>
         </div>
 
         <div className="flex gap-2 px-5 pb-[max(1.25rem,env(safe-area-inset-bottom))] pt-3">

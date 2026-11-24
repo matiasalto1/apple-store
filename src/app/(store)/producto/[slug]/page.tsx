@@ -20,7 +20,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const p = catalog.getProductBySlug(slug)
   if (!p) return {}
   const title = `${brandName(p)} ${p.name}`
-  const description = `${p.short} Desde ${formatPrice(priceRange(p).min)}. ${p.description}`.slice(0, 158)
+  const full = `${p.short} Desde ${formatPrice(priceRange(p).min)}. ${p.description}`
+  const description = full.length <= 158 ? full : `${full.slice(0, 155).replace(/\s+\S*$/, '')}…`
   const img = primaryImage(p)
   return {
     title,

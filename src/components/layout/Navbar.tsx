@@ -42,7 +42,7 @@ export function Navbar() {
       <div
         className={cn(
           'mx-auto flex max-w-[92rem] items-center justify-between gap-4 rounded-full px-3 transition-all duration-700 ease-[var(--ease-out-expo)] sm:px-5',
-          solid ? 'glass h-14' : 'h-16 border border-transparent bg-transparent',
+          solid ? 'glass h-14 bg-paper/85' : 'h-16 border border-transparent bg-transparent',
         )}
       >
         <div className="flex items-center gap-1 lg:gap-8">

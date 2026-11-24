@@ -9,3 +9,4 @@ dist-standalone
 next-env.d.ts
 .env*.local
 .env
+!.env.example

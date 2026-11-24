@@ -76,8 +76,10 @@ export function CheckoutView() {
   const [done, setDone] = useState<Extract<CheckoutResult, { kind: 'instructions' }> | null>(null)
   const [copied, setCopied] = useState('')
 
-  const set = (k: keyof CheckoutCustomer) => (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) =>
+  const set = (k: keyof CheckoutCustomer) => (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     setC((prev) => ({ ...prev, [k]: e.target.value }))
+    if (errors[k]) setErrors((prev) => ({ ...prev, [k]: undefined }))
+  }
 
   const validate = (): Errors => {
     const e: Errors = {}

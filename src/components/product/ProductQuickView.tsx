@@ -35,7 +35,7 @@ export function ProductQuickView() {
     <Overlay open={Boolean(product)} onClose={close} label={product ? `Vista rápida: ${product.name}` : 'Vista rápida'} side="center">
       {product && variant && (
         <div className="grid md:grid-cols-2">
-          <ProductImage product={product} className="aspect-square md:aspect-auto md:h-full md:min-h-[34rem]" sizes="(min-width: 768px) 32rem, 100vw" />
+          <ProductImage product={product} className="aspect-[4/3] md:aspect-auto md:h-full md:min-h-[34rem]" sizes="(min-width: 768px) 32rem, 100vw" />
           <div className="flex flex-col gap-6 p-6 pb-8 sm:p-8 md:p-10">
             <div className="flex items-start justify-between gap-4">
               <div>
