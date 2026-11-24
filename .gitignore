@@ -1,7 +1,11 @@
 node_modules
+.next
+out
 dist
 dist-standalone
 *.log
 .DS_Store
-.vite
 *.tsbuildinfo
+next-env.d.ts
+.env*.local
+.env

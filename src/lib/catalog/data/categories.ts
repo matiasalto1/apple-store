@@ -1,0 +1,121 @@
+import type { Category } from '../types'
+
+export const categories: Category[] = [
+  {
+    id: 'panales',
+    slug: 'panales',
+    name: 'Pañales',
+    blurb: 'Todos los talles, de recién nacido a XXG.',
+    seoTitle: 'Pañales para bebés: todos los talles',
+    seoDescription:
+      'Pañales descartables para bebés en talles RN, P, M, G, XG y XXG. Elegí por peso, compará presentaciones y comprá online en Argentina.',
+    intro:
+      'Elegí el talle por peso, no por edad: cada bebé crece a su ritmo. Si estás entre dos talles, el más grande suele ofrecer mejor ajuste en la cintura y menos fugas.',
+    heroProductId: 'panales-nube-premium',
+    featured: true,
+    order: 1,
+  },
+  {
+    id: 'toallitas',
+    slug: 'toallitas',
+    name: 'Toallitas húmedas',
+    blurb: 'Para cada cambio, en casa o de paseo.',
+    seoTitle: 'Toallitas húmedas para bebés',
+    seoDescription:
+      'Toallitas húmedas para bebés en presentaciones individuales y packs. Fórmulas suaves para el cambio de pañal y la higiene diaria.',
+    intro:
+      'Toallitas para el cambio de pañal, manos y carita. Los packs múltiples rinden más y te evitan quedarte sin reposición.',
+    heroProductId: 'toallitas-nube-agua',
+    featured: true,
+    order: 2,
+  },
+  {
+    id: 'higiene',
+    slug: 'higiene',
+    name: 'Higiene',
+    blurb: 'Baño, cuidado diario y rutinas simples.',
+    seoTitle: 'Higiene del bebé: baño y cuidado diario',
+    seoDescription:
+      'Productos de higiene para bebés: baño, shampoo, hisopos y cuidado diario. Una selección corta y clara para armar tu rutina.',
+    intro: 'Una rutina de higiene simple necesita pocos productos y buenos. Esta es nuestra selección para el día a día.',
+    heroProductId: 'bano-suave-brote',
+    featured: true,
+    order: 3,
+  },
+  {
+    id: 'cremas',
+    slug: 'cremas',
+    name: 'Cremas',
+    blurb: 'Cambio de pañal, hidratación y masajes.',
+    seoTitle: 'Cremas para bebés: cambio de pañal e hidratación',
+    seoDescription:
+      'Cremas para la zona del pañal, hidratantes corporales y aceites de masaje para bebés. Comprá online con atención personalizada.',
+    intro:
+      'Cremas para cada momento: el cambio de pañal, después del baño y el masaje antes de dormir. Ante cualquier irritación persistente, consultá con tu pediatra.',
+    heroProductId: 'crema-cambio-brote',
+    featured: true,
+    order: 4,
+  },
+  {
+    id: 'accesorios',
+    slug: 'accesorios',
+    name: 'Accesorios',
+    blurb: 'Cambiadores, bolsos y objetos de todos los días.',
+    seoTitle: 'Accesorios para bebés: cambiadores y bolsos',
+    seoDescription:
+      'Accesorios para bebés: cambiadores portátiles, bolsos y objetos prácticos para la casa y las salidas.',
+    intro: 'Objetos pensados para simplificar: salir con lo justo, cambiar en cualquier lugar y tener todo a mano.',
+    heroProductId: 'bolso-cambiador-lino',
+    featured: true,
+    order: 5,
+  },
+  {
+    id: 'alimentacion',
+    slug: 'alimentacion',
+    name: 'Alimentación',
+    blurb: 'Biberones, cucharas y primeras comidas.',
+    seoTitle: 'Alimentación del bebé: biberones y accesorios',
+    seoDescription:
+      'Biberones, cucharas de silicona, baberos y accesorios para la alimentación del bebé. Comprá online en Argentina.',
+    intro: 'De la primera mamadera a las primeras cucharadas. Materiales fáciles de limpiar y tamaños pensados para cada etapa.',
+    heroProductId: 'biberon-lumi',
+    featured: true,
+    order: 6,
+  },
+  {
+    id: 'recien-nacidos',
+    slug: 'recien-nacidos',
+    name: 'Recién nacidos',
+    blurb: 'Lo esencial para las primeras semanas.',
+    seoTitle: 'Productos para recién nacidos',
+    seoDescription:
+      'Todo lo esencial para las primeras semanas del bebé: pañales RN, toallitas, cremas y kits de bienvenida.',
+    intro: 'Las primeras semanas son de aprendizaje. Juntamos lo básico para que no tengas que pensar en todo al mismo tiempo.',
+    heroProductId: 'kit-recien-nacido',
+    featured: true,
+    order: 7,
+  },
+  {
+    id: 'kits',
+    slug: 'kits',
+    name: 'Kits',
+    blurb: 'Combinaciones listas para regalar o empezar.',
+    seoTitle: 'Kits para bebés y regalos',
+    seoDescription: 'Kits de productos para bebés listos para regalar o para empezar una rutina: higiene, recién nacido y más.',
+    intro: 'Kits armados en una sola caja, ideales para regalar o para resolver una necesidad completa en una compra.',
+    heroProductId: 'kit-higiene-esencial',
+    featured: false,
+    order: 8,
+  },
+  {
+    id: 'ofertas',
+    slug: 'ofertas',
+    name: 'Ofertas',
+    blurb: 'Promociones vigentes.',
+    seoTitle: 'Ofertas en productos para bebés',
+    seoDescription: 'Promociones vigentes en pañales, toallitas y productos para bebés.',
+    intro: 'Acá aparecen automáticamente los productos con un precio rebajado vigente.',
+    featured: false,
+    order: 9,
+  },
+]

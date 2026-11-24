@@ -1,165 +1,101 @@
-import { useEffect, useLayoutEffect, useRef, useState } from 'react'
-import { site } from '@/config/site'
-import { Logo } from '@/components/ui/Logo'
-import { Arrow, MagneticButton } from '@/components/ui/MagneticButton'
+'use client'
 
-/**
- * Minimal navbar.
- * - Hides on scroll down, returns on scroll up.
- * - A single indicator glides between links (hover → active section).
- */
+import { motion, useAnimationControls } from 'motion/react'
+import { Heart, Menu, Search, ShoppingBag, User } from 'lucide-react'
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
+import { useEffect, useState } from 'react'
+import { site } from '@/config/site'
+import { useCart } from '@/lib/cart/store'
+import { useFavorites } from '@/lib/favorites'
+import { cn } from '@/lib/format'
+import { useHydrated } from '@/lib/hooks'
+import { useUI } from '@/lib/ui-store'
+import { Logo } from '@/components/ui/Logo'
+
 export function Navbar() {
-  const [hidden, setHidden] = useState(false)
+  const pathname = usePathname()
+  const overlayMode = pathname === '/'
   const [scrolled, setScrolled] = useState(false)
-  const [open, setOpen] = useState(false)
-  const [active, setActive] = useState<string | null>(null)
-  const [hovered, setHovered] = useState<string | null>(null)
-  const listRef = useRef<HTMLUListElement>(null)
-  const indicator = useRef<HTMLSpanElement>(null)
+  const hydrated = useHydrated()
+  const count = useCart((s) => s.lines.reduce((n, l) => n + l.quantity, 0))
+  const lastAdded = useCart((s) => s.lastAdded)
+  const favCount = useFavorites((s) => s.ids.length)
+  const { openCart, setMenu, setSearch } = useUI()
+  const bump = useAnimationControls()
 
   useEffect(() => {
-    let last = window.scrollY
-    const onScroll = () => {
-      const y = window.scrollY
-      setScrolled(y > 24)
-      if (Math.abs(y - last) > 6) {
-        setHidden(y > last && y > 400)
-        last = y
-      }
-    }
+    const onScroll = () => setScrolled(window.scrollY > 24)
     onScroll()
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
-  // Active section tracking
   useEffect(() => {
-    const ids = site.nav.map((n) => n.href.slice(1))
-    const els = ids.map((id) => document.getElementById(id)).filter(Boolean) as HTMLElement[]
-    const io = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((e) => {
-          if (e.isIntersecting) setActive(`#${e.target.id}`)
-          else if (e.boundingClientRect.top > 0) setActive((cur) => (cur === `#${e.target.id}` ? null : cur))
-        })
-      },
-      { rootMargin: '-45% 0px -50% 0px' },
-    )
-    els.forEach((el) => io.observe(el))
-    return () => io.disconnect()
-  }, [])
+    if (lastAdded) bump.start({ scale: [1, 1.28, 0.92, 1], rotate: [0, -8, 6, 0], transition: { duration: 0.6 } })
+  }, [lastAdded, bump])
 
-  // Indicator position
-  const target = hovered ?? active
-  useLayoutEffect(() => {
-    const list = listRef.current
-    const ind = indicator.current
-    if (!list || !ind) return
-    const link = target ? list.querySelector<HTMLAnchorElement>(`a[href="${target}"]`) : null
-    if (!link) {
-      ind.style.opacity = '0'
-      return
-    }
-    const lr = list.getBoundingClientRect()
-    const r = link.getBoundingClientRect()
-    ind.style.opacity = '1'
-    ind.style.width = `${r.width}px`
-    ind.style.transform = `translateX(${r.left - lr.left}px)`
-  }, [target])
-
-  useEffect(() => {
-    document.documentElement.style.overflow = open ? 'hidden' : ''
-  }, [open])
+  const solid = scrolled || !overlayMode
 
   return (
-    <header
-      className={`fixed inset-x-0 top-0 z-50 transition-transform duration-700 ease-[var(--ease-out-expo)] ${
-        hidden && !open ? '-translate-y-full' : 'translate-y-0'
-      }`}
-    >
+    <header className="sticky top-0 z-[60] px-2 pt-2 sm:px-3">
       <div
-        className={`absolute inset-0 -z-10 border-b transition-all duration-700 ${
-          scrolled ? 'border-white/[0.06] bg-ink-950/70 backdrop-blur-xl' : 'border-transparent bg-transparent'
-        }`}
-      />
-      <nav className="container-x flex h-16 items-center justify-between md:h-[72px]" aria-label="Principal">
-        <Logo />
+        className={cn(
+          'mx-auto flex max-w-[92rem] items-center justify-between gap-4 rounded-full px-3 transition-all duration-700 ease-[var(--ease-out-expo)] sm:px-5',
+          solid ? 'glass h-14' : 'h-16 border border-transparent bg-transparent',
+        )}
+      >
+        <div className="flex items-center gap-1 lg:gap-8">
+          <button type="button" className="icon-btn lg:hidden" onClick={() => setMenu(true)} aria-label="Abrir menú">
+            <Menu size={21} />
+          </button>
+          <Logo />
+          <nav aria-label="Principal" className="hidden lg:block">
+            <ul className="flex items-center gap-1">
+              {site.nav.map((item) => {
+                const active = pathname.startsWith(item.href)
+                return (
+                  <li key={item.href}>
+                    <Link
+                      href={item.href}
+                      aria-current={active ? 'page' : undefined}
+                      className={cn(
+                        'relative rounded-full px-3.5 py-2 text-[0.9rem] font-medium transition-colors hover:bg-ink/5',
+                        active ? 'text-ink' : 'text-ink-soft hover:text-ink',
+                      )}
+                    >
+                      {item.label}
+                      {active && <motion.span layoutId="nav-dot" className="absolute bottom-0.5 left-1/2 h-1 w-1 -translate-x-1/2 rounded-full bg-accent" />}
+                    </Link>
+                  </li>
+                )
+              })}
+            </ul>
+          </nav>
+        </div>
 
-        <ul ref={listRef} className="relative hidden items-center gap-1 lg:flex" onMouseLeave={() => setHovered(null)}>
-          <span
-            ref={indicator}
-            aria-hidden="true"
-            className="absolute bottom-0 left-0 h-px bg-signal opacity-0 transition-all duration-500 ease-[var(--ease-out-expo)]"
-          />
-          {site.nav.map((item) => (
-            <li key={item.href}>
-              <a
-                href={item.href}
-                onMouseEnter={() => setHovered(item.href)}
-                onFocus={() => setHovered(item.href)}
-                onBlur={() => setHovered(null)}
-                aria-current={active === item.href ? 'true' : undefined}
-                className={`block px-4 py-2.5 text-[0.875rem] transition-colors duration-300 ${
-                  target === item.href ? 'text-fg' : 'text-mute hover:text-fg'
-                }`}
-              >
-                {item.label}
-              </a>
-            </li>
-          ))}
-        </ul>
-
-        <div className="flex items-center gap-2">
-          <span className="hidden sm:block">
-            <MagneticButton href="#contacto" variant="ghost" strength={0.2}>
-              Hablar con un especialista <Arrow />
-            </MagneticButton>
-          </span>
+        <div className="flex items-center">
+          <button type="button" className="icon-btn" onClick={() => setSearch(true)} aria-label="Buscar productos">
+            <Search size={20} />
+          </button>
+          <Link href="/cuenta" className="icon-btn hidden sm:inline-grid" aria-label="Mi cuenta">
+            <User size={20} />
+          </Link>
+          <Link href="/favoritos" className="icon-btn relative hidden sm:inline-grid" aria-label={`Favoritos${hydrated && favCount ? ` (${favCount})` : ''}`}>
+            <Heart size={20} />
+            {hydrated && favCount > 0 && <span className="absolute right-2 top-2 h-2 w-2 rounded-full bg-accent" aria-hidden="true" />}
+          </Link>
           <button
             type="button"
-            className="relative grid h-10 w-10 place-items-center rounded-full border border-white/10 lg:hidden"
-            aria-expanded={open}
-            aria-controls="mobile-menu"
-            aria-label={open ? 'Cerrar menú' : 'Abrir menú'}
-            onClick={() => setOpen((o) => !o)}
+            onClick={openCart}
+            className="relative ml-1 inline-flex h-11 items-center gap-2 rounded-full bg-ink pl-3.5 pr-4 text-paper transition hover:bg-accent-deep"
+            aria-label={`Abrir carrito, ${hydrated ? count : 0} productos`}
           >
-            <span className={`absolute h-px w-4 bg-fg transition-transform duration-500 ${open ? 'rotate-45' : '-translate-y-[3px]'}`} />
-            <span className={`absolute h-px w-4 bg-fg transition-transform duration-500 ${open ? '-rotate-45' : 'translate-y-[3px]'}`} />
+            <motion.span animate={bump} className="inline-grid">
+              <ShoppingBag size={18} />
+            </motion.span>
+            <span className="min-w-3 text-[0.875rem] font-semibold tabular-nums">{hydrated ? count : 0}</span>
           </button>
-        </div>
-      </nav>
-
-      {/* Mobile menu */}
-      <div
-        id="mobile-menu"
-        className={`fixed inset-0 top-16 z-40 bg-ink-950/96 backdrop-blur-xl transition-[opacity,visibility] duration-500 lg:hidden ${
-          open ? 'visible opacity-100' : 'invisible opacity-0'
-        }`}
-      >
-        <ul className="container-x flex flex-col pt-10">
-          {site.nav.map((item, i) => (
-            <li key={item.href} className="border-b border-white/[0.06]">
-              <a
-                href={item.href}
-                onClick={() => setOpen(false)}
-                className="flex items-baseline justify-between py-5 text-[2rem] font-medium tracking-[-0.03em]"
-                style={{
-                  transition: 'transform 0.7s var(--ease-out-expo), opacity 0.7s var(--ease-out-expo)',
-                  transitionDelay: open ? `${80 + i * 50}ms` : '0ms',
-                  transform: open ? 'none' : 'translateY(16px)',
-                  opacity: open ? 1 : 0,
-                }}
-              >
-                {item.label}
-                <span className="label-mono text-dim">0{i + 1}</span>
-              </a>
-            </li>
-          ))}
-        </ul>
-        <div className="container-x mt-10">
-          <MagneticButton href="#contacto" size="lg" className="w-full" onClick={() => setOpen(false)}>
-            Hablar con un especialista <Arrow />
-          </MagneticButton>
         </div>
       </div>
     </header>
